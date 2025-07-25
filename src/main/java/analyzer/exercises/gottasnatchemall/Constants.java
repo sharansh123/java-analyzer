@@ -9,5 +9,6 @@ public class Constants {
     public static final String TASK_3 = "canTrade";
     public static final String TASK_4 = "commonCards";
     public static final String TASK_5 = "allCards";
-    public static final String CORRECT_CONSTRUCTOR = "HashSet(Collection)";
+    public static final String CONSTRUCTOR_ARGUMENT = "cards";
+    public static final String CONTAINS = "contains";
 }

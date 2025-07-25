@@ -2,15 +2,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-class WrongConstructor {
+class WrongAddCard {
 
     static Set<String> newCollection(List<String> cards) {
-        HashSet<String> collection = new HashSet<String>();
-        collection.addAll(cards);
+        return new HashSet<>(cards);
     }
 
     static boolean addCard(String card, Set<String> collection) {
-        return collection.add(card);
+        if(collection.contains(card)) {
+            collection.add(card);
+            return true;
+        }
+        return false;
     }
 
     static boolean canTrade(Set<String> myCollection, Set<String> theirCollection) {
@@ -23,5 +26,6 @@ class WrongConstructor {
 
     static Set<String> allCards(List<Set<String>> collections) {
         return null;
+        //throw new UnsupportedOperationException("Please implement the (static) GottaSnatchEmAll.allCards() method");
     }
 }

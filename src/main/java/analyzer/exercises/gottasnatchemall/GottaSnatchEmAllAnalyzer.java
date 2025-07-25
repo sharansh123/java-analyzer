@@ -5,6 +5,7 @@ import analyzer.OutputCollector;
 import analyzer.Solution;
 import analyzer.comments.ExemplarSolution;
 import analyzer.exercises.gottasnatchemall.tasks.SetTask;
+import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
@@ -16,6 +17,7 @@ public class GottaSnatchEmAllAnalyzer extends VoidVisitorAdapter<OutputCollector
 
     @Override
     public void analyze(Solution solution, OutputCollector output) {
+
         for(CompilationUnit cu : solution.getCompilationUnits()) {
             cu.accept(this, output);
         }
@@ -28,17 +30,9 @@ public class GottaSnatchEmAllAnalyzer extends VoidVisitorAdapter<OutputCollector
     @Override
     public void visit(MethodDeclaration node, OutputCollector output) {
         String methodName = node.getNameAsString();
-        SetTask.getTask(methodName).execute(node, output);
+        SetTask task = SetTask.getTask(methodName);
+        task.execute(node, output);
         super.visit(node, output);
-//        switch(methodName){
-//            case TASK_1 -> {
-//                List<ObjectCreationExpr> objectCreationExprs = node.findAll(ObjectCreationExpr.class);
-//                long validConstructors = objectCreationExprs.stream()
-//                        .filter(this::matchIfCollectionIsUsed)
-//                        .count();
-//
-//            }
-//        }
     }
 
 
