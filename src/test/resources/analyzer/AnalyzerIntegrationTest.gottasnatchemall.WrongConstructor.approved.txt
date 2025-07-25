@@ -1,0 +1,16 @@
+{
+  "comments": [
+    {
+      "comment": "java.gottasnatchemall.use_correct_constructor",
+      "params": {
+        "correctConstructor": "HashSet(Collection)"
+      },
+      "type": "actionable"
+    },
+    {
+      "comment": "java.general.feedback_request",
+      "params": {},
+      "type": "informative"
+    }
+  ]
+}

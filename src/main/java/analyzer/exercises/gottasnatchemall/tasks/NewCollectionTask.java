@@ -7,7 +7,6 @@ import com.github.javaparser.ast.expr.ObjectCreationExpr;
 
 
 import static analyzer.exercises.gottasnatchemall.Constants.COLLECTION_NAME;
-import static analyzer.exercises.gottasnatchemall.Constants.CORRECT_CONSTRUCTOR;
 
 public class NewCollectionTask extends SetTask {
     @Override
@@ -19,6 +18,6 @@ public class NewCollectionTask extends SetTask {
                 .filter(expr -> expr.getArgument(0).asNameExpr().resolve().getType().isReference())
                 .count();
 
-        if(validConstructors == 0) output.addComment(new UseCorrectConstructor(CORRECT_CONSTRUCTOR));
+        if(validConstructors != 1) output.addComment(new UseCorrectConstructor());
     }
 }

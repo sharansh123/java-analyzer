@@ -3,6 +3,7 @@ package analyzer;
 import analyzer.comments.FeedbackRequest;
 import analyzer.exercises.GlobalAnalyzer;
 import analyzer.exercises.annalynsinfiltration.AnnalynsInfiltrationAnalyzer;
+import analyzer.exercises.gottasnatchemall.GottaSnatchEmAllAnalyzer;
 import analyzer.exercises.hamming.HammingAnalyzer;
 import analyzer.exercises.lasagna.LasagnaAnalyzer;
 import analyzer.exercises.leap.LeapAnalyzer;
@@ -63,6 +64,7 @@ public class AnalyzerRoot {
             case "two-fer" -> analyzers.add(new TwoferAnalyzer());
             case "wizards-and-warriors" -> analyzers.add(new WizardsAndWarriorsAnalyzer());
             case "wizards-and-warriors-2" -> analyzers.add(new WizardsAndWarriors2Analyzer());
+            case "gotta-snatch-em-all" -> analyzers.add(new GottaSnatchEmAllAnalyzer());
         }
 
         return List.copyOf(analyzers);

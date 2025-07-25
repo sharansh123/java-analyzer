@@ -237,4 +237,17 @@ class AnalyzerIntegrationTest {
 
         Approvals.verify(serialize(output.analysis()), Approvals.NAMES.withParameters(scenario));
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+        "WrongConstructor",
+
+    })
+    void gottasnatchemall(String scenario) throws IOException {
+        var path = Path.of("gotta-snatch-em-all", scenario + ".java");
+        var solution = new SolutionFromFiles("gotta-snatch-em-all", SCENARIOS.resolve(path));
+        var output = AnalyzerRoot.analyze(solution);
+
+        Approvals.verify(serialize(output.analysis()), Approvals.NAMES.withParameters(scenario));
+    }
 }

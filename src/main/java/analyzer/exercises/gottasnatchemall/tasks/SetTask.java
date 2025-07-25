@@ -11,12 +11,12 @@ public abstract class SetTask {
 
     public static SetTask getTask(String methodName) {
         return switch (methodName) {
-            case TASK_1: yield new NewCollectionTask();
-            case TASK_2: yield new AddCardTask();
-            case TASK_3: yield new CanTradeTask();
-            case TASK_4: yield new CommonCardTask();
-            case TASK_5: yield new AllCardsTask();
-            default: yield new NoTask();
+            case TASK_1 -> new NewCollectionTask();
+            case TASK_2 -> new AddCardTask();
+            case TASK_3 -> new CanTradeTask();
+            case TASK_4 -> new CommonCardTask();
+            case TASK_5 -> new AllCardsTask();
+            default -> new NoTask();
         };
     }
 

@@ -7,16 +7,11 @@ import analyzer.comments.ExemplarSolution;
 import analyzer.exercises.gottasnatchemall.tasks.SetTask;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.MethodDeclaration;
-import com.github.javaparser.ast.expr.ObjectCreationExpr;
-import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
-
-import java.util.List;
-import java.util.Optional;
 
 import static analyzer.exercises.gottasnatchemall.Constants.EXERCISE_NAME;
 
-public class GottaSnatchEmAll extends VoidVisitorAdapter<OutputCollector> implements Analyzer {
+public class GottaSnatchEmAllAnalyzer extends VoidVisitorAdapter<OutputCollector> implements Analyzer {
 
 
     @Override
