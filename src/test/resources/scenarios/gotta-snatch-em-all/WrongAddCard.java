@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -5,7 +6,8 @@ import java.util.Set;
 class WrongAddCard {
 
     static Set<String> newCollection(List<String> cards) {
-        return new HashSet<>(cards);
+        List<String> newCards = cards;
+        return new HashSet<>(newCards);
     }
 
     static boolean addCard(String card, Set<String> collection) {
@@ -21,7 +23,11 @@ class WrongAddCard {
     }
 
     static Set<String> commonCards(List<Set<String>> collections) {
-        return true;
+        Set<String> commonCards = collections.get(0);
+        for(Set<String> collection : collections) {
+            commonCards = commonCards.retainAll(collection);
+        }
+        return commonCards;
     }
 
     static Set<String> allCards(List<Set<String>> collections) {

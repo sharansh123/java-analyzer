@@ -1,0 +1,14 @@
+{
+  "comments": [
+    {
+      "comment": "java.gottasnatchemall.use_retain_all",
+      "params": {},
+      "type": "essential"
+    },
+    {
+      "comment": "java.general.feedback_request",
+      "params": {},
+      "type": "informative"
+    }
+  ]
+}

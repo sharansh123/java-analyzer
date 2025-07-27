@@ -1,17 +1,16 @@
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-class WrongConstructor {
-
+public class WrongCommonCardCase {
     static Set<String> newCollection(List<String> cards) {
-        HashSet<String> collection = new HashSet<String>();
-        collection.addAll(cards);
+        return new HashSet<>(cards);
     }
 
     static boolean addCard(String card, Set<String> collection) {
-        return collection.add(card);
+       return collection.add(card);
     }
 
     static boolean canTrade(Set<String> myCollection, Set<String> theirCollection) {
@@ -19,17 +18,19 @@ class WrongConstructor {
     }
 
     static Set<String> commonCards(List<Set<String>> collections) {
-        Set<String> commonCards = collections.get(0);
+        HashMap<String, Integer> map = new HashMap<>();
         for(Set<String> collection : collections) {
-            commonCards = commonCards
-                    .stream()
-                    .filter(collection::contains)
-                    .collect(Collectors.toSet());
+            for(String card : collection) {
+                map.put(card, map.getOrDefault(card, 0) + 1);
+            }
         }
-        return commonCards;
+        return map.keySet()
+                .stream().filter(x -> map.get(x) == collections.size())
+                .collect(Collectors.toSet());
     }
 
     static Set<String> allCards(List<Set<String>> collections) {
         return null;
+        //throw new UnsupportedOperationException("Please implement the (static) GottaSnatchEmAll.allCards() method");
     }
 }
