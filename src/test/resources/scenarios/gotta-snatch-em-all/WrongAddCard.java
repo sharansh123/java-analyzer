@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 class WrongAddCard {
 
@@ -31,7 +33,11 @@ class WrongAddCard {
     }
 
     static Set<String> allCards(List<Set<String>> collections) {
-        return null;
-        //throw new UnsupportedOperationException("Please implement the (static) GottaSnatchEmAll.allCards() method");
+        Set<String> allCards = collections.get(0);
+        for(Set<String> collection : collections) {
+            allCards.addAll(collection);
+        }
+        return allCards;
+
     }
 }

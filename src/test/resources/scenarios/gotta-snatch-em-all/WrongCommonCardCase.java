@@ -3,6 +3,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class WrongCommonCardCase {
     static Set<String> newCollection(List<String> cards) {
@@ -30,7 +31,10 @@ public class WrongCommonCardCase {
     }
 
     static Set<String> allCards(List<Set<String>> collections) {
-        return null;
-        //throw new UnsupportedOperationException("Please implement the (static) GottaSnatchEmAll.allCards() method");
+        Set<String> allCards = collections.get(0);
+        collections.forEach(collection -> {
+            allCards = Stream.concat(allCards.stream(), collection.stream()).collect(Collectors.toSet());
+        });
+        return allCards;
     }
 }

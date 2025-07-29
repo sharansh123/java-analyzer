@@ -1,8 +1,10 @@
 {
   "comments": [
     {
-      "comment": "java.gottasnatchemall.use_retain_all",
-      "params": {},
+      "comment": "java.gottasnatchemall.use_correct_func",
+      "params": {
+        "correct_func": "retainAll"
+      },
       "type": "essential"
     },
     {

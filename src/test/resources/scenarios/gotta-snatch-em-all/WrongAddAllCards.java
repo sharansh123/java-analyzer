@@ -1,15 +1,13 @@
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-class WrongConstructor {
-
+public class WrongAddAllCards {
     static Set<String> newCollection(List<String> cards) {
-        HashSet<String> collection = new HashSet<String>();
-        collection.addAll(cards);
+        List<String> newCards = cards;
+        return new HashSet<>(newCards);
     }
 
     static boolean addCard(String card, Set<String> collection) {
@@ -25,17 +23,18 @@ class WrongConstructor {
         for(Set<String> collection : collections) {
             commonCards = commonCards
                     .stream()
-                    .filter(collection::contains)
+                    .filter(card -> collection.contains(card))
                     .collect(Collectors.toSet());
         }
         return commonCards;
     }
 
     static Set<String> allCards(List<Set<String>> collections) {
-        Set<String> allCards = collections.get(0);
-        Iterator<Set<String>> iterator = collections.iterator();
-        while(iterator.hasNext()) {
-            allCards = Stream.concat(allCards.stream(), iterator.next().stream()).collect(Collectors.toSet());
+        Set<String> allCards = new HashSet<>();
+        for(Set<String> collection : collections) {
+            for(String card : collection) {
+                allCards.add(card);
+            }
         }
         return allCards;
     }

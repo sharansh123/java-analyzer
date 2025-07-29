@@ -29,7 +29,11 @@ public class WhileLoopCommonCardsCase {
     }
 
     static Set<String> allCards(List<Set<String>> collections) {
-        return null;
-        //throw new UnsupportedOperationException("Please implement the (static) GottaSnatchEmAll.allCards() method");
+        Set<String> allCards = collections.get(0);
+        Iterator<Set<String>> iterator = collections.iterator();
+        while(iterator.hasNext()) {
+            allCards.addAll(iterator.next());
+        }
+        return allCards;
     }
 }

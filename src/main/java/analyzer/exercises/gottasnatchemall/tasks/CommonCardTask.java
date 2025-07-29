@@ -1,7 +1,7 @@
 package analyzer.exercises.gottasnatchemall.tasks;
 
 import analyzer.OutputCollector;
-import analyzer.exercises.gottasnatchemall.UseRetainAll;
+import analyzer.exercises.gottasnatchemall.UseCorrectFunc;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.MethodCallExpr;
@@ -14,23 +14,9 @@ import com.github.javaparser.ast.stmt.WhileStmt;
 public class CommonCardTask extends SetTask {
     @Override
     public void execute(MethodDeclaration node, OutputCollector output) {
-        if(!isRetainAllPresent(node) && !isUsingStreamForIntersection(node)) {
-            output.addComment(new UseRetainAll());
+        if(!SetTask.isFuncInsideLoop(node, "retainAll") && !isUsingStreamForIntersection(node)) {
+            output.addComment(new UseCorrectFunc("retainAll"));
         }
-    }
-
-    @SuppressWarnings("unchecked")
-    public boolean isRetainAllPresent(MethodDeclaration node) {
-        //Looking For retainAll inside a loop
-        return node.findAll(MethodCallExpr.class)
-                .stream()
-                .filter(expr -> expr.getNameAsString().equals("retainAll"))
-                .anyMatch(expr ->
-                   expr.findAncestor(ForStmt.class).isPresent()
-                || expr.findAncestor(ForEachStmt.class).isPresent()
-                || expr.findAncestor(WhileStmt.class).isPresent()
-                || expr.findAncestor(DoStmt.class).isPresent()
-                );
     }
 
     public boolean isUsingStreamForIntersection(MethodDeclaration node) {
