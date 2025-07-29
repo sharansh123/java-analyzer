@@ -246,7 +246,9 @@ class AnalyzerIntegrationTest {
         "WhileLoopCommonCardsCase",
         "WrongAddAllCards",
         "WhileAndForEachLoopAddAllCardsCase",
-        "LoopForTradingCase"
+        "LoopForTradingCase",
+        "ExemplarSolution",
+        "NonExemplarSolution"
     })
     void gottasnatchemall(String scenario) throws IOException {
         var path = Path.of("gotta-snatch-em-all", scenario + ".java");
