@@ -15,7 +15,11 @@ public class WrongCommonCardCase {
     }
 
     static boolean canTrade(Set<String> myCollection, Set<String> theirCollection) {
-        return true;
+        Set<String> theirSet = new HashSet<>(theirCollection);
+        Set<String> mySet = new HashSet<>(myCollection);
+        mySet.removeAll(theirCollection);
+        theirSet.removeAll(myCollection);
+        return mySet.size() > 0  && theirSet.size() > 0;
     }
 
     static Set<String> commonCards(List<Set<String>> collections) {

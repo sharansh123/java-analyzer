@@ -14,7 +14,7 @@ import com.github.javaparser.ast.stmt.WhileStmt;
 public class CommonCardTask extends SetTask {
     @Override
     public void execute(MethodDeclaration node, OutputCollector output) {
-        if(!SetTask.isFuncInsideLoop(node, "retainAll") && !isUsingStreamForIntersection(node)) {
+        if(!isFuncInsideLoop(node, "retainAll") && !isUsingStreamForIntersection(node)) {
             output.addComment(new UseCorrectFunc("retainAll"));
         }
     }
@@ -28,27 +28,5 @@ public class CommonCardTask extends SetTask {
                 .anyMatch(expr -> searchInLambda(expr.getArgument(0)) || searchForReference(expr.getArgument(0)));
     }
 
-    public boolean searchInLambda(Expression expression) {
-        //checking for set contains() method inside filter()
-        if(expression.isLambdaExpr()){
-            return expression
-                    .asLambdaExpr()
-                    .findAll(MethodCallExpr.class)
-                    .stream()
-                    .anyMatch(expr -> expr.getNameAsString().equals("contains"));
 
-        }
-        return false;
-    }
-
-    public boolean searchForReference(Expression expression) {
-        // checking for usage of setA::contains inside filter()
-        if(expression.isMethodReferenceExpr()){
-            return expression
-                    .asMethodReferenceExpr()
-                    .getIdentifier()
-                    .contains("contains");
-        }
-        return false;
-    }
 }

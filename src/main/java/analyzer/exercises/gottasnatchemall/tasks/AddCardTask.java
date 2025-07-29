@@ -13,16 +13,18 @@ import java.util.Objects;
 import static analyzer.exercises.gottasnatchemall.Constants.CONTAINS;
 
 public class AddCardTask extends SetTask {
-    @Override
-    public void execute(MethodDeclaration node, OutputCollector output) {
-           long validCount = node.findAll(IfStmt.class)
-                    .stream()
-                    .map(IfStmt::getCondition)
-                   .filter(expr -> !expr.findAll(MethodCallExpr.class).isEmpty())
-                   .map(Expression::asMethodCallExpr)
-                   .filter(methodCallExpr -> methodCallExpr.getName().asString().equalsIgnoreCase(CONTAINS))
-                   .count();
 
-           if (validCount > 0) output.addComment(new AvoidUsingContains());
+    @Override
+    @SuppressWarnings("unchecked")
+    public void execute(MethodDeclaration node, OutputCollector output) {
+
+           node.findAll(MethodCallExpr.class)
+                    .stream()
+                   .filter(methodCallExpr -> methodCallExpr.getNameAsString().equalsIgnoreCase(CONTAINS))
+                   .filter(methodCallExpr -> methodCallExpr.findAncestor(IfStmt.class).isPresent())
+                   .findFirst()
+                   .ifPresent(
+                           x -> output.addComment(new AvoidUsingContains())
+                   );
     }
 }

@@ -241,11 +241,12 @@ class AnalyzerIntegrationTest {
     @ParameterizedTest
     @ValueSource(strings = {
         "WrongConstructor",
-        "WrongAddCard",
+        "UsingContainsInAddCardAndSameSetInTrade",
         "WrongCommonCardCase",
         "WhileLoopCommonCardsCase",
         "WrongAddAllCards",
-        "WhileAndForEachLoopAddAllCardsCase"
+        "WhileAndForEachLoopAddAllCardsCase",
+        "LoopForTradingCase"
     })
     void gottasnatchemall(String scenario) throws IOException {
         var path = Path.of("gotta-snatch-em-all", scenario + ".java");

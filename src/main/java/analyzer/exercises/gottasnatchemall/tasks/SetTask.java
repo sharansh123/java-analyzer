@@ -2,6 +2,7 @@ package analyzer.exercises.gottasnatchemall.tasks;
 
 import analyzer.OutputCollector;
 import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.stmt.DoStmt;
 import com.github.javaparser.ast.stmt.ForEachStmt;
@@ -27,7 +28,7 @@ public abstract class SetTask {
 
     //Check If the 'addAll' & 'retainAll' are used within a loop.
     @SuppressWarnings("unchecked")
-    public static boolean isFuncInsideLoop(MethodDeclaration node, String func) {
+    public boolean isFuncInsideLoop(MethodDeclaration node, String func) {
         //Looking For retainAll inside a loop
         return node.findAll(MethodCallExpr.class)
                 .stream()
@@ -38,6 +39,30 @@ public abstract class SetTask {
                                 || expr.findAncestor(WhileStmt.class).isPresent()
                                 || expr.findAncestor(DoStmt.class).isPresent()
                 );
+    }
+
+    public boolean searchInLambda(Expression expression) {
+        //checking for set contains() method inside filter()
+        if(expression.isLambdaExpr()){
+            return expression
+                    .asLambdaExpr()
+                    .findAll(MethodCallExpr.class)
+                    .stream()
+                    .anyMatch(expr -> expr.getNameAsString().equals("contains"));
+
+        }
+        return false;
+    }
+
+    public boolean searchForReference(Expression expression) {
+        // checking for usage of setA::contains inside filter()
+        if(expression.isMethodReferenceExpr()){
+            return expression
+                    .asMethodReferenceExpr()
+                    .getIdentifier()
+                    .contains("contains");
+        }
+        return false;
     }
 
 }

@@ -9,12 +9,12 @@ import com.github.javaparser.ast.expr.MethodCallExpr;
 public class AllCardsTask extends SetTask {
     @Override
     public void execute(MethodDeclaration node, OutputCollector output) {
-        if(!SetTask.isFuncInsideLoop(node, "addAll") && !isUSingStreamForUnion(node)) {
+        if(!isFuncInsideLoop(node, "addAll") && !isUsingStreamForUnion(node)) {
             output.addComment(new UseCorrectFunc("addAll"));
         }
     }
 
-    public boolean isUSingStreamForUnion(MethodDeclaration node){
+    public boolean isUsingStreamForUnion(MethodDeclaration node){
 
         long countOfStreamUsed = node.findAll(MethodCallExpr.class)
                 .stream()

@@ -11,7 +11,15 @@ public class WhileLoopCommonCardsCase {
     }
 
     static boolean canTrade(Set<String> myCollection, Set<String> theirCollection) {
-        return true;
+        Set<String> mySet = myCollection.stream()
+                .filter(val -> !theirCollection.contains(val))
+                .collect(Collectors.toSet());
+
+        Set<String> theirSet = theirCollection.stream()
+                .filter(val -> !myCollection.contains(val))
+                .collect(Collectors.toSet());
+
+        return mySet.size() > 0  && theirSet.size() > 0;
     }
 
     static Set<String> commonCards(List<Set<String>> collections) {
